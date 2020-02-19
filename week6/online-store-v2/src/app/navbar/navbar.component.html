@@ -1,0 +1,41 @@
+
+
+<div class="nav-container">
+    <nav>
+        <a href="/categories/all-products" class="nav-brand">KBTUExpress</a>
+
+        <ul class="nav-links">
+            <li class="nav-item"><a href="/categories/all-products">Catalog</a></li>
+            <li class="nav-item"><a href="/categories/all-products">About</a></li>
+            <li class="nav-item"><a (click)="cartToggle()"><i class="fas fa-shopping-cart"></i></a><span id="cart-counter">{{ cart.items.length }}</span></li>
+        </ul>
+    </nav>
+    <div class="cart-container" *ngIf="cartVisible">
+        <div id="cart-window">
+            <ul class="cart-items">
+                <p *ngIf="cart.items.length === 0">
+                    Your cart is empty!
+                </p>
+                <li class="cart-item" *ngFor="let item of cart.items">
+                    <div class="left">
+                        <img class="item-img" src="{{ database.products[item.id].img }}" alt="picture">
+                        <div class="info">
+                            <p class="item-name">{{ database.products[item.id].name }}</p>
+                            <p class="item-price">{{ database.products[item.id].price * item.quantity | currency }}</p>
+                        </div>
+                    </div>
+                    <div class="control-block">
+                        <a (click)="plus(item)"><i class="fas fa-plus"></i></a>
+                        <p>{{ item.quantity }}</p>
+                        <a (click)="minus(item)"><i class="fas fa-minus"></i></a>
+                    </div>
+                </li>
+            </ul>
+            <div class="row cart-footer" *ngIf="!(cart.items.length === 0)">
+                <p id="total-price">Total price: {{ angularMath.getNumberWithDecimals(database.cart.totalPrice, 2) | currency}}</p>
+                <a id="checkout-btn" href="/cart">Checkout</a>
+            </div>
+        </div>
+        
+    </div>
+</div>

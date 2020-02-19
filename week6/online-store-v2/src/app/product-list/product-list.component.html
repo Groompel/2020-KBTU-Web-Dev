@@ -1,0 +1,40 @@
+
+
+<div class="page-container">
+    <h1>{{ category.name }}</h1>
+
+    <div class="content-container">
+
+    <a id="categories-toggler" (click)="categoriesToggle()"><i class="fas fa-bars"></i></a>
+
+        <div class="categories-container" *ngIf="categoriesVisible">
+            <ul class="categories">
+                <li class="category" *ngFor="let category of categories">
+                    <a href="/categories/{{category.routeName}}">
+                        <span class="icon"><i class="{{ category.iconClass }}"></i></span>{{ category.name}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="list-container">
+            <ul class="list">
+                <li class="list-item" *ngFor="let product of products">
+                    <div class="img-container">
+                        <img class="product-img" src="{{ product.img }}" alt="product.name">
+                        
+                    </div>
+                    <h3 class="product-name"><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></h3>
+                    <div class="row">
+                        <p class="product-price">{{ product.price | currency }}</p>
+                        <button class="cart-btn" (click)="addItem(product)"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </li>
+                <script>
+                    let name = angular.element(document.querySelector(".product-name"));
+                    console.log(name);
+                </script>
+            </ul>
+        </div>
+    </div>
+</div>
