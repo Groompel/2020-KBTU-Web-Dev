@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
 
-import { database } from "src/app/database";
+import { PRODUCTS_ALL } from "src/app/database";
+import { ProductsService } from './products.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  constructor(
+    private productsService: ProductsService,
+  ) { }
 
-  cart = database.cart;
+  cart = {
+    items: [],
+    totalPrice: 0,
+    totalQuantity: 0,
+  };
+
+  getCart() {
+    return this.cart;
+  }
 
   addItem(newItemId) {
     let exists = false;
@@ -20,13 +33,13 @@ export class CartService {
     });
 
     if(!exists) {
-      database.cart.items.push({
+      this.cart.items.push({
         id: newItemId,
         quantity: 1,
       });
     }
-    this.cart.totalPrice += database.products[newItemId].price;
-
+    this.cart.totalPrice +=  this.productsService.getProductById(newItemId).price;
+    this.cart.totalQuantity++;
   }
 
   removeItem(itemId) {
@@ -45,12 +58,11 @@ export class CartService {
       i++;
     });
 
-    this.cart.totalPrice -= database.products[itemId].price;
-
+    this.cart.totalPrice -= this.productsService.getProductById(itemId).price;
+    this.cart.totalQuantity--;
 
   }
 
-  
 
-  constructor() { }
+
 }

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  list-style-type: none;
+  font-size: 0.5rem;
+
+  li {
+    width: 100%;
+    height: fit-content;
+  }
+
+}

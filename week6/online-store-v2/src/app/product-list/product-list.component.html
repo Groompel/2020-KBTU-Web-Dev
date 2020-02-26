@@ -1,39 +1,43 @@
 
 
 <div class="page-container">
-    <h1>{{ category.name }}</h1>
+
+  <div class="page-title">
+    <h1><i class="{{ selectedCategory.iconClass }}"></i></h1>
+    <h1 id="page-categorie-name">{{ selectedCategory.name }}</h1>
+  </div>
 
     <div class="content-container">
-
-    <a id="categories-toggler" (click)="categoriesToggle()"><i class="fas fa-bars"></i></a>
-
-        <div class="categories-container" *ngIf="categoriesVisible">
-            <ul class="categories">
-                <li class="category" *ngFor="let category of categories">
-                    <a href="/categories/{{category.routeName}}">
-                        <span class="icon"><i class="{{ category.iconClass }}"></i></span>{{ category.name}}
-                    </a>
-                </li>
+        <div class="categories-container" [style.margin-right]="categoriesVisible ? '0px' : '10px'">
+            <a id="categories-toggler" (click)="categoriesToggle()" #ctgToggler><i class="fas fa-bars fa-2x"></i></a>
+            <ul class="categories" *ngIf="categoriesVisible" [class.fade-from-left]="categoriesVisible">
+                <a class="category" *ngFor="let category of categories" href="/categories/{{category.routeName}}" [class.selected-category]="category.routeName === selectedCategory.routeName">
+                    <li>
+                        <span class="icon"><i class="{{ category.iconClass }}"></i></span>{{ category.name }}
+                    </li>
+                </a>
             </ul>
         </div>
 
-        <div class="list-container">
+        <div class="list-container" [class.product-list-transition]="categoriesVisible">
             <ul class="list">
                 <li class="list-item" *ngFor="let product of products">
                     <div class="img-container">
-                        <img class="product-img" src="{{ product.img }}" alt="product.name">
-                        
+                        <div class="img-counter" *ngIf="product.imagesCounterAnimate">{{ (product.currentImageNumber + 1) + "/" + (product.images.length)}}</div>
+                        <div class="img-cover">
+                          <img class="product-img" src="{{ product.images[product.currentImageNumber] }}" alt="product.name">
+                        </div>
+                        <div class="img-magnifier"></div>
                     </div>
-                    <h3 class="product-name"><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></h3>
-                    <div class="row">
-                        <p class="product-price">{{ product.price | currency }}</p>
-                        <button class="cart-btn" (click)="addItem(product)"><i class="fas fa-shopping-cart"></i></button>
+                    <div class="row img-control">
+                      <button class="left" (click)="carouselLeft(product)"><i class="fas fa-arrow-left"></i></button>
+                      <button class="right" (click)="carouselRight(product)"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <h3 class="product-name"><a href="{{ product.url }}" target="_blank">{{ shortenName(product.name, 56) }}</a></h3>
+                    <div class="row product-item-row">
+                        <button class="cart-btn" (click)="addItem(product)">{{ product.price | currency }}</button>
                     </div>
                 </li>
-                <script>
-                    let name = angular.element(document.querySelector(".product-name"));
-                    console.log(name);
-                </script>
             </ul>
         </div>
     </div>

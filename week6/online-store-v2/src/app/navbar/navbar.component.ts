@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { database } from "../database";
+
 
 import { CartService } from "../cart.service";
 
 import { angularMath } from 'angular-ts-math';
+import { ProductsService } from '../products.service';
 
 
 @Component({
@@ -14,15 +15,35 @@ import { angularMath } from 'angular-ts-math';
 })
 export class NavbarComponent implements OnInit {
 
-  angularMath = angularMath;
-  database = database;
-  cart = database.cart;
-  cartVisible = false;
-
-
   constructor(
     private cartService: CartService,
+    private productsService: ProductsService,
   ) { }
+
+  angularMath = angularMath;
+  cartVisible = false;
+  cartAnimate = false;
+  cartAnimationTiming = 300;
+  cart = this.cartService.cart;
+
+
+  getProductInfo(id) {
+    return this.productsService.getProductById(id);
+  }
+
+  shortenName(name: String, numberOfCharachters: number) {
+    return name.substring(0, numberOfCharachters) + "...";
+  }
+
+
+  animate() {
+    this.cartAnimate = true;
+
+    setTimeout(() => {
+      this.cartAnimate = false;
+    }, this.cartAnimationTiming)
+
+  }
 
   minus(item) {
     this.cartService.removeItem(item.id);

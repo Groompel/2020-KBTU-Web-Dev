@@ -5,10 +5,13 @@
         <a href="/categories/all-products" class="nav-brand">KBTUExpress</a>
 
         <ul class="nav-links">
-            <li class="nav-item"><a href="/categories/all-products">Catalog</a></li>
-            <li class="nav-item"><a href="/categories/all-products">About</a></li>
-            <li class="nav-item"><a (click)="cartToggle()"><i class="fas fa-shopping-cart"></i></a><span id="cart-counter">{{ cart.items.length }}</span></li>
+            <li class="nav-item desktop"><a href="/categories/all-products">Catalog</a></li>
+            <li class="nav-item desktop"><a href="/categories/all-products">About</a></li>
+            <li class="nav-item cart"><a (click)="cartToggle()" (click)="animate()"><i class="fas fa-shopping-cart" [class.cart-animate]="cartAnimate && cartVisible" [class.cart-animate-reverse]="!cartVisible"></i></a><span id="cart-counter">{{ cart.totalQuantity }}</span></li>
         </ul>
+        <script>
+            alert("Hello world!")
+        </script>
     </nav>
     <div class="cart-container" *ngIf="cartVisible">
         <div id="cart-window">
@@ -18,10 +21,10 @@
                 </p>
                 <li class="cart-item" *ngFor="let item of cart.items">
                     <div class="left">
-                        <img class="item-img" src="{{ database.products[item.id].img }}" alt="picture">
+                        <img class="item-img" [src]="getProductInfo(item.id).images" alt="picture">
                         <div class="info">
-                            <p class="item-name">{{ database.products[item.id].name }}</p>
-                            <p class="item-price">{{ database.products[item.id].price * item.quantity | currency }}</p>
+                            <p class="item-name">{{ shortenName(getProductInfo(item.id).name, 20) }}</p>
+                            <p class="item-price">{{ getProductInfo(item.id).price * item.quantity | currency }}</p>
                         </div>
                     </div>
                     <div class="control-block">
@@ -32,10 +35,10 @@
                 </li>
             </ul>
             <div class="row cart-footer" *ngIf="!(cart.items.length === 0)">
-                <p id="total-price">Total price: {{ angularMath.getNumberWithDecimals(database.cart.totalPrice, 2) | currency}}</p>
+                <p id="total-price">Total price: {{ angularMath.getNumberWithDecimals(cart.totalPrice, 2) | currency}}</p>
                 <a id="checkout-btn" href="/cart">Checkout</a>
             </div>
         </div>
-        
+
     </div>
 </div>
