@@ -1,0 +1,14 @@
+
+<div class="task-container">
+
+  <form action="">
+    <label for="task-title">Title:</label>
+    <input name="task-title" class="task-title-input" type="text" [value]="task.title">
+    <label for="task-status">Status:</label>
+    <input name="task-status" class="task-status-input" type="text" [value]="task.status">
+    <label for="task-desc">Descripton:</label>
+    <textarea name="task-desc" class="task-desc">{{ task.description }}</textarea>
+    <button (click)="submitForm()" type="button">Save</button>
+    <a href="/">Go back</a>
+  </form>
+</div>

@@ -7,14 +7,18 @@
   <li *ngFor="let product of productInfos; let i = index" [attr.data-index]="i">
 
     <div>{{ "{" }}</div>
+
     <div>name: "{{ product.title }}",</div>
+
     <div>images: [</div>
     <div *ngFor="let image of product.productImages">"{{ image }}",</div>
     <div>],</div>
+
     <div>url: "{{ product.detailUrl }}",</div>
     <div>price: {{ product.priceSummary.originalAmount.min.value }},</div>
     <div>id: {{ product.id }},</div>
     <div>categoryId: 1,</div>
+    
     <div>{{ "}," }}</div>
   </li>
 

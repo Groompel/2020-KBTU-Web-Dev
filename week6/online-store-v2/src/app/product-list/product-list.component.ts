@@ -1,11 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-
 import { CartService } from "../cart.service";
-import { log } from "util";
+
 import { ProductsService } from "../products.service";
+import { imagesLoaded } from "node_modules/imagesLoaded/imagesloaded.js";
 
 declare const assignOffsetTop: any;
+declare const imageAnimate: any;
 
 @Component({
   selector: "app-product-list",
@@ -38,12 +39,15 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     return name.substring(0, numberOfCharachters) + "...";
   }
 
+  
+
   carouselLeft(product) {
     if (product.currentImageNumber === 0) {
       product.currentImageNumber = product.images.length - 1;
     } else {
       product.currentImageNumber--;
     }
+
 
     this.animateCounter(product);
   }
@@ -57,7 +61,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     this.animateCounter(product);
   }
 
+
   animateCounter(product) {
+
     var highestTimeoutId = setTimeout(";");
     for (var i = 0; i < highestTimeoutId; i++) {
       clearTimeout(i);
@@ -93,5 +99,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     assignOffsetTop();
+
   }
 }

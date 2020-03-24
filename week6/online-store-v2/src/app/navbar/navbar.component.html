@@ -6,7 +6,6 @@
 
         <ul class="nav-links">
             <li class="nav-item desktop"><a href="/categories/all-products">Catalog</a></li>
-            <li class="nav-item desktop"><a href="/categories/all-products">About</a></li>
             <li class="nav-item cart"><a (click)="cartToggle()" (click)="animate()"><i class="fas fa-shopping-cart" [class.cart-animate]="cartAnimate && cartVisible" [class.cart-animate-reverse]="!cartVisible"></i></a><span id="cart-counter">{{ cart.totalQuantity }}</span></li>
         </ul>
         <script>

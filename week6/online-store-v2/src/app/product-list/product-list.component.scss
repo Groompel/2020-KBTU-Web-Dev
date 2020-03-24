@@ -4,9 +4,9 @@ $colors: (
   accent-light: lighten(#ff6d00, 15%),
   primary: #0c5fa3,
   primary-light: lighten(#0c5fa3, 20%),
-  primary-dark: #021e35,
+  primary-dark: #021e35
 );
-$image-width: 265px;
+$image-width: 280px;
 $border-radius: 0.3rem;
 
 @function color($color) {
@@ -31,34 +31,11 @@ $border-radius: 0.3rem;
   @include tablet {
     padding: 20px 1px;
   }
-  .page-title {
-    margin: 20px 0 30px;
-    h1 {
-      margin: 0;
-    }
-
-    #page-categorie-name {
-      position: relative;
-      z-index: 3;
-      transition: color,font-size 0.2s ease;
-
-
-      &.page-categorie-name-fixed {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        color: white;
-      }
-    }
-
-
-
-  }
 }
 
 .content-container {
   background-color: #fff;
-
+  margin-top: 50px;
   position: relative;
   text-align: left;
   display: flex;
@@ -66,7 +43,7 @@ $border-radius: 0.3rem;
 
 .categories-container {
   position: fixed;
-  margin: 35px 15px;
+  margin: 133px 15px;
   display: flex;
   height: fit-content;
 
@@ -153,23 +130,45 @@ $border-radius: 0.3rem;
   flex: 1 1 100%;
   padding: 0 10px;
 
+  .page-title {
+    position: relative;
+    text-align: center;
+    margin: 20px 0 30px;
+    h1 {
+      margin: 0;
+    }
+
+    #page-categorie-name {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto;
+      transition: color, font-size 0.2s ease;
+      z-index: 11;
+      &.page-categorie-name-fixed {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        color: white;
+      }
+    }
+  }
+
   ul.list {
     list-style-type: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
 
     li.list-item {
       border: 1px solid rgb(191, 191, 191);
-      // border-top: 3px solid color(primary-light);
-      flex: 0 1 300px;
+      // flex: 0 1 300px;
+      border-radius: $border-radius;
       height: 480px;
-      margin: 15px 15px 0 0;
       overflow: hidden;
       padding: 15px;
       background: white;
-      border-radius: $border-radius;
       position: relative;
       transition: 0.2s ease-in;
 
@@ -181,17 +180,18 @@ $border-radius: 0.3rem;
         position: relative;
         overflow: hidden;
         height: $image-width;
-
-        .img-counter {
-          background-color: #1d1d1dd5;
+        width: $image-width;
+        margin: 0 auto ;
+        .img-loading-animation {
           position: absolute;
-          z-index: 3;
-          color: white;
-          top: 10px;
-          right: 10px;
-          padding: 2px 4px;
-          font-size: 0.8rem;
-          animation: img-counter-fade 0.5s ease;
+          top: 50%;
+          left: 50%;
+          margin-top: -50px;
+          margin-left: -50px;
+          z-index: 1;
+          visibility: hidden;
+          width: 100px;
+          height: fit-content;
         }
 
         @keyframes img-counter-fade {
@@ -209,7 +209,18 @@ $border-radius: 0.3rem;
           height: $image-width;
           border-radius: $border-radius;
           width: $image-width;
-          margin: 0 auto;
+
+          .img-counter {
+            background-color: #1d1d1dd5;
+            position: absolute;
+            z-index: 2;
+            color: white;
+            top: 10px;
+            right: 10px;
+            padding: 2px 4px;
+            font-size: 0.8rem;
+            animation: img-counter-fade 0.5s ease;
+          }
         }
 
         img.product-img {
@@ -222,14 +233,13 @@ $border-radius: 0.3rem;
           width: $image-width;
           height: $image-width;
           position: absolute;
-          top:0;
+          top: 0;
           left: 50%;
-          margin-left: calc(-#{$image-width}/2);
+          margin-left: calc(-#{$image-width}/ 2);
           &:hover {
             cursor: pointer;
           }
         }
-
       }
       .img-control {
         button {
@@ -268,9 +278,9 @@ $border-radius: 0.3rem;
 
       .row.product-item-row {
         position: absolute;
-        bottom: 10px;
+        bottom: 15px;
         left: 50%;
-        margin-left: -45%;;
+        margin-left: -45%;
         width: 90%;
       }
 
@@ -319,16 +329,15 @@ $border-radius: 0.3rem;
   flex: 1 1 70%;
   margin-left: 280px;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   &:before {
     position: absolute;
     content: "";
-    height: 99.6%;
+    height: 98.18%;
     width: 100%;
     bottom: 0;
     left: 0;
     border-left: 1px solid #00000030;
-
   }
   @include mobile() {
     margin-left: 270px;

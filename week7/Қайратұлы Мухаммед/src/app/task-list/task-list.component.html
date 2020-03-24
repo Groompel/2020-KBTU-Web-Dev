@@ -1,0 +1,13 @@
+
+
+
+<div class="tasks-container">
+  <h1>Қайратұлы Мухаммед</h1>
+  <h2>18BD111195</h2>
+  <ul class="tasks-list">
+    <li class="task" *ngFor="let task of tasks">
+      <a class="task-title" [href]=" '/tasks/' + task.id">{{ task.title }}</a>
+      <span class="task-status">{{ task.status }}</span>
+    </li>
+  </ul>
+</div>

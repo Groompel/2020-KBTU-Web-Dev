@@ -1,17 +1,47 @@
-
 let pgCtgNmInitialOffset;
 
 function assignOffsetTop() {
+
   pgCtgNmInitialOffset = $("#page-categorie-name").offset().top;
 }
 
+// function imageAnimate(productId, productUrl) {
+//   const loadingImgPath = "assets/images/loading.gif"
+//   const img = $("#img-"+productId);
+//   const loadingImg = $("#img-loading-"+productId);
+
+
+//   const imgLoad = imagesLoaded(img);
+
+//   imgLoad.on("always", (instance) => {
+
+//     console.log("progress!");
+
+//     // if(loadingImg.css("visibility") === "hidden"){
+//     //   console.log("dine");
+//     //   img.css("visibility", "hidden");
+//     //   loadingImg.css("visibility", "visible");
+//     // }
+
+//     // img.ready(() => {
+//     //   loadingImg.css("visibility", "hidden");
+//     //   img.css("visibility", "visible");
+//     //   return;
+//     // });
+//   });
+
+
+
+// }
+
 // Scrolling funcitons
 $(window).scroll(function (e) {
-  const $el = $(".categories-container");
+  const categoriesContainer = $(".categories-container");
+  const categoriesContainerOffsetTop = 50;
   const pageCategorieName = $("#page-categorie-name");
   const pageTitle = pageCategorieName.parent();
   const offsetFromTheTop = 20;
-  var isPositionFixed = ($el.css('position') == 'fixed');
+  var isPositionFixed = (categoriesContainer.css('position') == 'fixed');
 
 
   //Change color of title
@@ -35,22 +65,22 @@ $(window).scroll(function (e) {
     pageTitle.css("height", pageTitleHeight);
     pageCategorieName.addClass("page-categorie-name-fixed");
     pageCategorieName.css({
-      "margin-left": `-${pageCategorieName.css("width").substring(0,3) / 2}px`,
+      "margin-left": `-${pageCategorieName.css("width").substring(0,3) / 2 - 25 }px`,
     });
   }
   if($(this).scrollTop() < pgCtgNmInitialOffset - offsetFromTheTop) {
     pageCategorieName.removeClass("page-categorie-name-fixed");
     pageCategorieName.css({
-      "margin-left": `0`,
+      "margin-left": `auto`,
     });
   }
 
 
-  if ($(this).scrollTop() > 130 && !isPositionFixed) {
-    $el.css({ 'position': 'fixed', 'top': '100px' });
+  if ($(this).scrollTop() > 40 + categoriesContainerOffsetTop && !isPositionFixed) {
+    categoriesContainer.css({ 'position': 'fixed', 'top': categoriesContainerOffsetTop + "px" });
   }
-  if ($(this).scrollTop() < 130 && isPositionFixed) {
-    $el.css({ 'position': 'absolute', 'top': '0px' });
+  if ($(this).scrollTop() < 40 + categoriesContainerOffsetTop && isPositionFixed) {
+    categoriesContainer.css({ 'position': 'absolute', 'top': '0px' });
   }
 });
 
@@ -66,8 +96,8 @@ $(document).ready(() => {
 
 
     const imgCenter = {
-      x: width / 2 + 120,
-      y: height / 2 + 120,
+      x: width / 2 + 135,
+      y: height / 2 + 135,
     }
 
     img.css("width", "200%");

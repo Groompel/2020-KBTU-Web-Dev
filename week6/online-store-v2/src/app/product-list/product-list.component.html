@@ -2,10 +2,9 @@
 
 <div class="page-container">
 
-  <div class="page-title">
-    <h1><i class="{{ selectedCategory.iconClass }}"></i></h1>
-    <h1 id="page-categorie-name">{{ selectedCategory.name }}</h1>
-  </div>
+
+
+
 
     <div class="content-container">
         <div class="categories-container" [style.margin-right]="categoriesVisible ? '0px' : '10px'">
@@ -20,14 +19,33 @@
         </div>
 
         <div class="list-container" [class.product-list-transition]="categoriesVisible">
+          <div class="page-title">
+            <h1><i class="{{ selectedCategory.iconClass }}"></i></h1>
+            <h1 id="page-categorie-name">{{ selectedCategory.name }}</h1>
+          </div>
             <ul class="list">
                 <li class="list-item" *ngFor="let product of products">
                     <div class="img-container">
-                        <div class="img-counter" *ngIf="product.imagesCounterAnimate">{{ (product.currentImageNumber + 1) + "/" + (product.images.length)}}</div>
-                        <div class="img-cover">
-                          <img class="product-img" src="{{ product.images[product.currentImageNumber] }}" alt="product.name">
+                      <div class="img-cover">
+                          <div class="img-counter" *ngIf="product.imagesCounterAnimate">{{ (product.currentImageNumber + 1) + "/" + (product.images.length)}}</div>
+                          <img [id]="'img-' + product.id"class="product-img" src="{{ product.images[product.currentImageNumber] }}" alt="product.name">
                         </div>
                         <div class="img-magnifier"></div>
+                        <div [id]="'img-loading-' + product.id" class="img-loading-animation">
+                          <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                              <path fill="#000000" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                <animateTransform
+                                  attributeName="transform"
+                                  attributeType="XML"
+                                  type="rotate"
+                                  dur="1s"
+                                  from="0 50 50"
+                                  to="360 50 50"
+                                  repeatCount="indefinite"/>
+                            </path>
+                          </svg>
+                        </div>
                     </div>
                     <div class="row img-control">
                       <button class="left" (click)="carouselLeft(product)"><i class="fas fa-arrow-left"></i></button>

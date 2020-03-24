@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxImagesloadedModule } from "ngx-imagesloaded";
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,7 @@ import { ProductInfoGetterComponent } from './product-info-getter/product-info-g
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxImagesloadedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

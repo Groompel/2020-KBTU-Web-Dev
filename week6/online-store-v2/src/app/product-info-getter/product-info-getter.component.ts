@@ -35,14 +35,12 @@ export class ProductInfoGetterComponent implements OnInit {
   }
 
   initializeInfos() {
-    let counter = 0;
     this.products.forEach(product => {
 
       const productId = product.url.substring(product.url.indexOf("item/") + 5, product.url.indexOf(".html"));
       setTimeout( () => {
         this.configService.getProductInfo(productId).subscribe(obs => {
               this.productInfos.push(obs);
-              console.log(obs);
         });
       }, this.loadDelayMillis);
 
